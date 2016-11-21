@@ -2,8 +2,8 @@ require 'net/http'
 require 'json'
 
 SCHEDULER.every '1h', :first_in => 0 do |job|
-  repo_id = "5406f507e30ba0542305e4e3"
-  api_token = "255887c05d5a64ea167e4d3455f63d8f71574536"
+  repo_id = ""
+  api_token = ""
 
   uri = URI.parse("https://codeclimate.com/api/repos/#{repo_id}")
   http = Net::HTTP.new(uri.host, uri.port)

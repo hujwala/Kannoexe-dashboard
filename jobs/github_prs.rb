@@ -1,7 +1,7 @@
 require 'octokit'
 
 SCHEDULER.every '10s', :first_in => 0 do |job|
-  client = Octokit::Client.new(:access_token => "a59cd18bc38ee0299c032e32166fac80bd884c8c")
+  client = Octokit::Client.new(:access_token => "a1602c4c2172421200f240d3823ce527d1a58dd1")
   my_organization = "Qwinix"
   repos = "konnexe-rails"
 

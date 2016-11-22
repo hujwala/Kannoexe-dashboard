@@ -1,9 +1,9 @@
 require 'jira-ruby'
 
-SCHEDULER.every '2m', :first_in => 0 do |job|
+SCHEDULER.every '1h', :first_in => 0 do |job|
   client = JIRA::Client.new({
     :username => "upatel",
-    :password => "Qwinix",
+    :password => "Qwinix123",
     :site => "qwinix.atlassian.net/secure/RapidBoard.jspa?rapidView=288&view=planning.nodetail",
     :auth_type => :basic,
     :context_path => ""

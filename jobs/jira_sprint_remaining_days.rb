@@ -70,7 +70,7 @@ def create_request(path)
 end
 
 view_mapping.each do |view, view_id|
-  SCHEDULER.every '10m', :first_in => 0 do |id|
+  SCHEDULER.every '1h', :first_in => 0 do |id|
     view_name = ""
     sprint_name = ""
     days = ""

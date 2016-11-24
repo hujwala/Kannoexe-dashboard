@@ -4,7 +4,7 @@ host = "qwinix.atlassian.net/secure/RapidBoard.jspa?rapidView=288&view=planning.
 username = "upatel"
 password = "Qwinix123"
  project = "Konnexe"
-status = "OPEN"
+status = "QA"
 
 options = {
             :username => username,
@@ -14,7 +14,7 @@ options = {
             :auth_type => :basic
           }
 
-SCHEDULER.every '1h', :first_in => 0 do |job|
+SCHEDULER.every '10s', :first_in => 0 do |job|
 
   client = JIRA::Client.new(options)
   num = 0;

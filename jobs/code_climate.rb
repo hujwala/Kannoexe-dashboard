@@ -14,5 +14,5 @@ SCHEDULER.every '10s', :first_in => 0 do |job|
   stats = JSON.parse(response.body)
   current_gpa = stats['last_snapshot']['gpa'].to_f
   covered_percent = stats['last_snapshot']['covered_percent'].to_f
-  send_event("code-climate", {current: current_gpa , name: app_name, percent_covered: covered_percent})
+  send_event("code-climate", {current: current_gpa, percent_covered: covered_percent})
 end

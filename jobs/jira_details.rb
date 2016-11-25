@@ -1,6 +1,6 @@
 require 'jira-ruby'
 
-SCHEDULER.every '10s', :first_in => 0 do |job|
+SCHEDULER.every '1h', :first_in => 0 do |job|
   client = JIRA::Client.new({
     :username => "upatel",
     :password => "Qwinix123",

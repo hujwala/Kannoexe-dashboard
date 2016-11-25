@@ -9,7 +9,7 @@ SCHEDULER.every '2m', :first_in => 0 do |job|
     :context_path => ""
   })
 
-  closed_points = client.Issue.jql("sprint in openSprints() and status = \"QA\"").map{ |issue| issue.fields['customfield_10004'] }.reduce(:+) || 0
+  closed_points = client.Issue.jql("sprint in openSprints() and status = \"DONE\"").map{ |issue| issue.fields['customfield_10004'] }.reduce(:+) || 0
   total_points = client.Issue.jql("sprint in openSprints()").map{ |issue| issue.fields['customfield_10004'] }.reduce(:+) || 0
   if total_points == 0
     percentage = 0

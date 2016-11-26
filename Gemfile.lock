@@ -10,6 +10,7 @@ GEM
       public_suffix (~> 2.0, >= 2.0.2)
     backports (3.6.8)
     buftok (0.2.0)
+    coderay (1.1.1)
     coffee-script (2.2.0)
       coffee-script-source
       execjs
@@ -51,6 +52,7 @@ GEM
     json (1.8.3)
     memoizable (0.4.2)
       thread_safe (~> 0.3, >= 0.3.1)
+    method_source (0.8.2)
     minitest (5.9.1)
     multi_json (1.12.1)
     multipart-post (2.0.0)
@@ -58,6 +60,10 @@ GEM
     oauth (0.5.1)
     octokit (4.6.0)
       sawyer (~> 0.8.0, >= 0.5.3)
+    pry (0.10.4)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
     public_suffix (2.0.4)
     rack (1.5.5)
     rack-protection (1.5.3)
@@ -82,6 +88,7 @@ GEM
       rack-test
       sinatra (~> 1.4.0)
       tilt (>= 1.3, < 3)
+    slop (3.6.0)
     sprockets (2.10.2)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -118,6 +125,7 @@ DEPENDENCIES
   dashing
   jira-ruby
   octokit
+  pry
   twitter (>= 5.9.0)
 
 BUNDLED WITH

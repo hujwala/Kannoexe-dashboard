@@ -3,8 +3,8 @@ require 'jira-ruby'
 host = "qwinix.atlassian.net/secure/RapidBoard.jspa?rapidView=288&view=planning.nodetail"
 username = "upatel"
 password = "Qwinix123"
- project = "konnexe-rails"
-status = "TO DO"
+ project = "Konnexe"
+status = "QA"
 
 options = {
             :username => username,
@@ -14,10 +14,11 @@ options = {
             :auth_type => :basic
           }
 
-SCHEDULER.every '10s', :first_in => 0 do |job|
+SCHEDULER.every '1h', :first_in => 0 do |job|
 
   client = JIRA::Client.new(options)
   num = 0;
+
   client.Issue.jql("PROJECT = \"#{project}\" AND STATUS = \"#{status}\"").each do |issue|
       num+=1
   end

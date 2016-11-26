@@ -1,6 +1,6 @@
 require 'jira-ruby'
 
-SCHEDULER.every '1h', :first_in => 0 do |job|
+SCHEDULER.every '10s', :first_in => 0 do |job|
   client = JIRA::Client.new({
     :username => "upatel",
     :password => "Qwinix123",
@@ -9,8 +9,8 @@ SCHEDULER.every '1h', :first_in => 0 do |job|
     :context_path => ""
   })
 
-  closed_points = client.Issue.jql("sprint in openSprints() and status = \"QA\"").map{ |issue| issue.fields['customfield_10004'] }.reduce(:+) || 0
-  total_points = client.Issue.jql("sprint in openSprints()").map{ |issue| issue.fields['customfield_10004'] }.reduce(:+) || 0
+  closed_points = client.Issue.jql("sprint in openSprints() and status = \"QA\"").map{ |issue| issue.fields['customfield_10004'] }
+  total_points = client.Issue.jql("sprint in openSprints()").map{ |issue| issue.fields['customfield_10004'] }
   if total_points == 0
     percentage = 0
     moreinfo = "No sprint currently in progress"

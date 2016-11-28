@@ -124,6 +124,7 @@ PLATFORMS
 DEPENDENCIES
   dashing
   jira-ruby
+  json
   octokit
   pry
   twitter (>= 5.9.0)

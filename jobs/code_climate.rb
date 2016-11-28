@@ -1,5 +1,6 @@
 require 'net/http'
 require 'json'
+require 'pry'
 
 SCHEDULER.every '1h', :first_in => 0 do |job|
   repo_id = "58368748b4a890008c001b47"

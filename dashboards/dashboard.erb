@@ -1,16 +1,21 @@
 <% content_for :title do %>Konnexe Dashboard<% end %>
-
+<script type='text/javascript'>
+ $(function() {
+   Dashing.gridsterLayout('[{"col":3,"row":2,"size_x":1,"size_y":1},{"col":3,"row":1,"size_x":2,"size_y":1},{"col":2,"row":1,"size_x":1,"size_y":1},{"col":1,"row":1,"size_x":1,"size_y":1},{"col":1,"row":2,"size_x":2,"size_y":1},{"col":4,"row":2,"size_x":1,"size_y":1}]')
+ });
+ </script>
 <div class="gridster">
   <ul>
-   <li data-row="1" data-col="2" data-sizex="1" data-sizey="1">
-  <div data-id="jira" data-view="Number" data-title="Open Issues"></div>
+
+<li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+    <div data-id="jira_in_prog_issues" data-view="JiraListCurrentSprintIssues"></div>
 </li>
 
-  <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+  <li data-row="1" data-col="1" data-sizex="2" data-sizey="1">
   <div data-view="PullRequests"  data-header="Pull requests" data-id="github"></div>
 </li>
 
-<li data-row="1" data-col="1" data-sizex="2" data-sizey="1">
+<li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
   <div data-id="code-climate" data-view="Codeclimate" data-title="Code Climate GPA"></div>
 </li>
 

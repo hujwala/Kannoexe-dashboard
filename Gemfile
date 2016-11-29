@@ -8,3 +8,4 @@ gem 'octokit'
 gem 'jira-ruby', :require => 'jira'
 gem 'pry'
 gem 'json'
+gem "travis"

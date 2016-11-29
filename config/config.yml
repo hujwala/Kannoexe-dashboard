@@ -1,0 +1,3 @@
+username: <%= ENV['upatel'] %>
+password: <%= ENV['Qwinix123'] %>
+

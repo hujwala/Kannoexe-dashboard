@@ -11,6 +11,7 @@ SCHEDULER.every '1h', :first_in => 0 do |job|
   http.use_ssl = true
   request = Net::HTTP::Get.new(uri.request_uri)
   request.set_form_data({api_token: api_token})
+  binding.pry
   response = http.request(request)
   stats = JSON.parse(response.body)
   current_gpa = stats['last_snapshot']['gpa'].to_f

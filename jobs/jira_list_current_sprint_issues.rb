@@ -1,6 +1,7 @@
 require 'jira-ruby'
 require 'net/http'
 require 'json'
+require 'pry'
 
 # Settings to configure:
 # PROJECT: the project path/name
@@ -78,7 +79,7 @@ def create_request(path)
 end
 
 ISSUE_LISTS.each do |list_config|
-  SCHEDULER.every '1h', :first_in => 0 do |job|
+  # SCHEDULER.every '10s', :first_in => 0 do |job|
     issues = []
     status_id = list_config[:status_id]
     client = JIRA::Client.new(JIRA_CONFIG)
@@ -97,6 +98,9 @@ ISSUE_LISTS.each do |list_config|
     issue_type = JIRA_STATUSES[status_id]
     active_sprint = get_active_sprint_for_view(RAPID_VIEW_ID)
     sprint_name = active_sprint['name']
-    send_event(list_config[:widget_id], { header: "#{sprint_name} Issues", issue_type: issue_type, issues: issues})
+    if issues.count == 0
+    moreinfo = "0"
   end
-end
+    send_event(list_config[:widget_id], { header: "#{sprint_name} Issues", issue_type: issue_type, issues: issues, moreinfo: moreinfo})
+  end
+# end

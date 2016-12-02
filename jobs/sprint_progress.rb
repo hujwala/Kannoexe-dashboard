@@ -9,7 +9,6 @@ SCHEDULER.every '1h', :first_in => 0 do |job|
     :auth_type => :basic,
     :context_path => ""
   })
-
   closed_points = client.Issue.jql("sprint in openSprints() and status = \"QA\"").map{ |issue| issue.fields['customfield_10004'] }.compact
   s1 = closed_points.inject(0, :+)
   total_points = client.Issue.jql("sprint in openSprints()").map{ |issue| issue.fields['customfield_10004']}.compact

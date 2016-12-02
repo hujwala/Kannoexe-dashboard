@@ -2,17 +2,21 @@ require 'jira-ruby'
 require 'pry'
 
 SCHEDULER.every '1h', :first_in => 0 do |job|
-  client = JIRA::Client.new({
-    :username => 'upatel',
-    :password => 'Qwinix123',
-    :site => "https://qwinix.atlassian.net",
+
+    client = JIRA::Client.new({
+    :username => "upatel",
+    :password => "Qwinix123",
+    :site => "https://qwinix.atlassian.net/secure/RapidBoard.jspa?rapidView=288",
     :auth_type => :basic,
     :context_path => ""
   })
   closed_points = client.Issue.jql("sprint in openSprints() and status = \"QA\"").map{ |issue| issue.fields['customfield_10004'] }.compact
-  s1 = closed_points.inject(0, :+)
+  qa_points = client.Issue.jql("sprint in openSprints() and status = \"READY FOR QA\"").map{ |issue| issue.fields['customfield_10004'] }.compact
+
+  s1 = closed_points.inject(0, :+) + qa_points.inject(0, :+)
   total_points = client.Issue.jql("sprint in openSprints()").map{ |issue| issue.fields['customfield_10004']}.compact
   s2 = total_points.inject(0, :+)
+
   if s1 == 0
     percentage = 0
     moreinfo = "No sprint currently in progress"

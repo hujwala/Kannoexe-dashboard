@@ -11,8 +11,8 @@ require 'pry'
 PROJECT = "Konnexe"
 RAPID_VIEW_ID = 288
 JIRA_CONFIG = {
-  :username     => 'upatel',
-  :password     => 'Qwinix123',
+  :username     => ENV["username"],
+  :password     => ENV["password"],
   :site         => "https://qwinix.atlassian.net",
   :auth_type    => :basic,
   :context_path => ''
@@ -79,7 +79,7 @@ def create_request(path)
 end
 
 ISSUE_LISTS.each do |list_config|
-  # SCHEDULER.every '10s', :first_in => 0 do |job|
+  SCHEDULER.every '10s', :first_in => 0 do |job|
     issues = []
     status_id = list_config[:status_id]
     client = JIRA::Client.new(JIRA_CONFIG)
@@ -103,4 +103,4 @@ ISSUE_LISTS.each do |list_config|
   end
     send_event(list_config[:widget_id], { header: "#{sprint_name} Issues", issue_type: issue_type, issues: issues, moreinfo: moreinfo})
   end
-# end
+end

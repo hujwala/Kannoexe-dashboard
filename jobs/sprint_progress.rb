@@ -10,7 +10,7 @@ require 'pry'
     :auth_type => :basic,
     :context_path => ""
   })
-  closed_points = client.Issue.jql("sprint in openSprints() and status = \"QUALITY CHECKED\"").map{ |issue| issue.fields['customfield_10004'] }.compact
+  closed_points = client.Issue.jql("sprint in openSprints() and status = \"QUALITY CHECKED IN ST\"").map{ |issue| issue.fields['customfield_10004'] }.compact
   s1 = closed_points.inject(0, :+)
   total_points = client.Issue.jql("sprint in openSprints()").map{ |issue| issue.fields['customfield_10004']}.compact
   s2 = total_points.inject(0, :+)

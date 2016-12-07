@@ -1,7 +1,7 @@
 require 'jira-ruby'
 require 'pry'
 
-# SCHEDULER.every '10s', :first_in => 0 do |job|
+SCHEDULER.every '10s', :first_in => 0 do |job|
 
     client = JIRA::Client.new({
     :username => "upatel",
@@ -24,4 +24,4 @@ require 'pry'
   end
 
   send_event('sprint_progress', { title: "Sprint Progress", min: 0, value: percentage, max: 100, moreinfo: moreinfo })
-# end
+end

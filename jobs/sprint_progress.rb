@@ -1,7 +1,7 @@
 require 'jira-ruby'
 require 'pry'
 
-SCHEDULER.every '10s', :first_in => 0 do |job|
+SCHEDULER.every '1h', :first_in => 0 do |job|
 
     client = JIRA::Client.new({
     :username => "upatel",
@@ -15,7 +15,7 @@ SCHEDULER.every '10s', :first_in => 0 do |job|
   total_points = client.Issue.jql("sprint in openSprints()").map{ |issue| issue.fields['customfield_10004']}.compact
   s2 = total_points.inject(0, :+)
 
-  if s1 == 0
+  if s2 == 0
     percentage = 0
     moreinfo = "No sprint currently in progress"
   else

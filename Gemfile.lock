@@ -10,6 +10,7 @@ GEM
       public_suffix (~> 2.0, >= 2.0.2)
     backports (3.6.8)
     buftok (0.2.0)
+    chronic (0.10.2)
     coderay (1.1.1)
     coffee-script (2.2.0)
       coffee-script-source
@@ -90,6 +91,7 @@ GEM
       rack
     rack-test (0.6.3)
       rack (>= 1.0)
+    rake (11.3.0)
     rufus-scheduler (2.0.24)
       tzinfo (>= 0.3.22)
     sass (3.2.19)
@@ -150,6 +152,8 @@ GEM
       unf_ext
     unf_ext (0.0.7.2)
     websocket (1.2.3)
+    whenever (0.9.7)
+      chronic (>= 0.6.3)
 
 PLATFORMS
   ruby
@@ -160,8 +164,10 @@ DEPENDENCIES
   json
   octokit
   pry
+  rake (~> 11.1, >= 11.1.2)
   travis
   twitter (>= 5.9.0)
+  whenever
 
 BUNDLED WITH
-   1.11.2
+   1.13.6

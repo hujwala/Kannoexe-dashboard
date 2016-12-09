@@ -9,3 +9,5 @@ gem 'jira-ruby', :require => 'jira'
 gem 'pry'
 gem 'json'
 gem "travis"
+gem 'whenever'
+gem 'rake', '~> 11.1', '>= 11.1.2'

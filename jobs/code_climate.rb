@@ -2,7 +2,7 @@ require 'net/http'
 require 'json'
 require 'pry'
 
-SCHEDULER.every '10s', :first_in => 0 do |job|
+SCHEDULER.every '1h', :first_in => 0 do |job|
   repo_id = "58368748b4a890008c001b47"
   api_token = "255887c05d5a64ea167e4d3455f63d8f71574536"
   uri = URI.parse("https://codeclimate.com/api/repos/#{repo_id}")
@@ -20,3 +20,4 @@ end
 
 
 # CODECLIMATE_REPO_TOKEN=4b83522bcc0c0471a90ae45e94e6b965f6b322bac7e4e525791aaf20b63adda2 bundle exec codeclimate-test-reporter
+# curl --get --data api_token=255887c05d5a64ea167e4d3455f63d8f71574536 https://codeclimate.com/api/repos/58368748b4a890008c001b47

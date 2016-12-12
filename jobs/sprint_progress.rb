@@ -10,64 +10,35 @@ SCHEDULER.every '1h', :first_in => 0 do |job|
     :auth_type => :basic,
     :context_path => ""
   })
-  closed_points = client.Issue.jql("sprint in openSprints() and status = \"QUALITY CHECKED IN ST\"").map{ |issue| issue.fields['customfield_10004'] }.compact
-  s1 = closed_points.inject(0, :+)
+  inprogress_points = client.Issue.jql("sprint in openSprints() and status = \"IN PROGRESS\"").map{ |issue| issue.fields['customfield_10004'] }.compact
+  inprogress = inprogress_points.inject(0, :+)
+
+   todo_points = client.Issue.jql("sprint in openSprints() and status = \"TO DO\"").map{ |issue| issue.fields['customfield_10004'] }.compact
+  todo = todo_points.inject(0, :+)
+
+  qa_points = client.Issue.jql("sprint in openSprints() and status = \"READY FOR QA\"").map{ |issue| issue.fields['customfield_10004'] }.compact
+  qa = qa_points.inject(0, :+)
+
+  st_points = client.Issue.jql("sprint in openSprints() and status = \"QUALITY CHECKED IN ST\"").map{ |issue| issue.fields['customfield_10004'] }.compact
+  st = st_points.inject(0, :+)
+
+    reopened_points = client.Issue.jql("sprint in openSprints() and status = \"Reopened\"").map{ |issue| issue.fields['customfield_10004'] }.compact
+  reopened = st_points.inject(0, :+)
+
+  # QUALITY CHECKED IN ST
+  # Reopened
+
   total_points = client.Issue.jql("sprint in openSprints()").map{ |issue| issue.fields['customfield_10004']}.compact
-  s2 = total_points.inject(0, :+)
+  totalpoints = total_points.inject(0, :+)
 
-  if s2 == 0
-    percentage = 0
-    moreinfo = "No sprint currently in progress"
-  else
-    percentage = ((s1/s2)*100).to_i
-    moreinfo = "#{s1.to_i} / #{s2.to_i}"
-  end
 
-  send_event('sprint_progress', { title: "Sprint Progress", min: 0, value: percentage, max: 100, moreinfo: moreinfo })
+    percentage_todo = ((todo/totalpoints)*100).to_i
+    percentage_qa = ((qa/totalpoints)*100).to_i
+    percentage_inprogress = ((inprogress/totalpoints)*100).to_i
+    percentage_st = ((st/totalpoints)*100).to_i
+    percentage_reopened = ((reopened/totalpoints)*100).to_i
+
+
+
+  send_event('sprint_progress', { title: "Sprint Progress", min: 0, value: percentage_todo, progress_in: percentage_inprogress, progress_qa: percentage_qa, progress_st: percentage_st, progress_reopen: percentage_reopened,  max: 100 })
 end
-
-
-
-# require 'jira-ruby'
-# require 'pry'
-
-# # SCHEDULER.every '10s', :first_in => 0 do |job|
-
-#     client = JIRA::Client.new({
-#     :username => "upatel",
-#     :password => "Qwinix123",
-#     :site => "https://qwinix.atlassian.net/secure/RapidBoard.jspa?rapidView=288/",
-#     :auth_type => :basic,
-#     :context_path => ""
-#   })
-
-#   inprogress_points = client.Issue.jql("sprint in openSprints() and status = \"IN PROGRESS\"").map{ |issue| issue.fields['customfield_10004'] }.compact
-#   inprogress = inprogress_points.inject(0, :+)
-
-
-#    todo_points = client.Issue.jql("sprint in openSprints() and status = \"TO DO\"").map{ |issue| issue.fields['customfield_10004'] }.compact
-#   todo = todo_points.inject(0, :+)
-
-#   qa_points = client.Issue.jql("sprint in openSprints() and status = \"READY FOR QA\"").map{ |issue| issue.fields['customfield_10004'] }.compact
-#   qa = qa_points.inject(0, :+)
-
-#   st_points = client.Issue.jql("sprint in openSprints() and status = \"QUALITY CHECKED IN ST\"").map{ |issue| issue.fields['customfield_10004'] }.compact
-#   st = st_points.inject(0, :+)
-
-#   total_points = client.Issue.jql("sprint in openSprints()").map{ |issue| issue.fields['customfield_10004']}.compact
-#   totalpoints = total_points.inject(0, :+)
-
-
-#     percentage_todo = ((todo/totalpoints)*100).to_i
-#     percentage_qa = ((qa/totalpoints)*100).to_i
-#     percentage_inprogress = ((inprogress/totalpoints)*100).to_i
-
-#     if st == 0
-#     percentage_st = "hi"
-#     else
-#     percentage_st = ((st/totalpoints)*100).to_i
-#     end
-
-
-#   send_event('sprint_progress', { title: "Sprint Progress", min: 0, value: percentage_todo, progress: percentage_inprogress, progress_qa: percentage_qa, progress_st: percentage_st, max: 100 })
-# # end

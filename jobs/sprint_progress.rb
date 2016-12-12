@@ -1,7 +1,7 @@
 require 'jira-ruby'
 require 'pry'
 
-SCHEDULER.every '1h', :first_in => 0 do |job|
+# SCHEDULER.every '10s', :first_in => 0 do |job|
 
     client = JIRA::Client.new({
     :username => "upatel",
@@ -16,8 +16,11 @@ SCHEDULER.every '1h', :first_in => 0 do |job|
    todo_points = client.Issue.jql("sprint in openSprints() and status = \"TO DO\"").map{ |issue| issue.fields['customfield_10004'] }.compact
   todo = todo_points.inject(0, :+)
 
-  qa_points = client.Issue.jql("sprint in openSprints() and status = \"READY FOR QA\"").map{ |issue| issue.fields['customfield_10004'] }.compact
-  qa = qa_points.inject(0, :+)
+  qa_points = client.Issue.jql("sprint in openSprints() and status = \"QA\"").map{ |issue| issue.fields['customfield_10004'] }.compact
+  qa1_points = client.Issue.jql("sprint in openSprints() and status = \"READY FOR QA\"").map{ |issue| issue.fields['customfield_10004'] }.compact
+
+  qa = qa_points.inject(0, :+) + qa1_points.inject(0, :+)
+
 
   st_points = client.Issue.jql("sprint in openSprints() and status = \"QUALITY CHECKED IN ST\"").map{ |issue| issue.fields['customfield_10004'] }.compact
   st = st_points.inject(0, :+)
@@ -41,4 +44,4 @@ SCHEDULER.every '1h', :first_in => 0 do |job|
 
 
   send_event('sprint_progress', { title: "Sprint Progress", min: 0, value: percentage_todo, progress_in: percentage_inprogress, progress_qa: percentage_qa, progress_st: percentage_st, progress_reopen: percentage_reopened,  max: 100 })
-end
+# end

@@ -13,7 +13,7 @@ SCHEDULER.every '1h', :first_in => 0 do |job|
   response = http.request(request)
   stats = JSON.parse(response.body)
   current_gpa = stats['last_snapshot']['gpa'].to_f
-  covered_percent = stats['last_snapshot']['covered_percent'].to_f
+  covered_percent = stats['last_snapshot']['previous_snapshot'].to_f
   send_event("code-climate", {current: current_gpa, percent_covered: covered_percent})
 end
 

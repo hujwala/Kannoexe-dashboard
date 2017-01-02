@@ -35,13 +35,18 @@ SCHEDULER.every '1h', :first_in => 0 do |job|
   totalpoints = total_points.inject(0, :+)
 
 
+
+
+if totalpoints == 0
+    moreinfo = "No sprint currently in progress"
+  else
     percentage_todo = ((todo/totalpoints)*100).to_i
     percentage_qa = ((qa/totalpoints)*100).to_i
     percentage_inprogress = ((inprogress/totalpoints)*100).to_i
     percentage_st = ((st/totalpoints)*100).to_i
     percentage_reopened = ((reopened/totalpoints)*100).to_i
+  end
 
 
-
-  send_event('sprint_progress', { title: "Sprint Progress", min: 0, value: percentage_todo, progress_in: percentage_inprogress, progress_qa: percentage_qa, progress_st: percentage_st, progress_reopen: percentage_reopened,  max: 100 })
+  send_event('sprint_progress', { title: "Sprint Progress", min: 0, value: percentage_todo, progress_in: percentage_inprogress, progress_qa: percentage_qa, progress_st: percentage_st, progress_reopen: percentage_reopened,  max: 100, moreinfo: moreinfo })
 end

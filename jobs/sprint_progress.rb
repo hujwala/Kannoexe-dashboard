@@ -26,7 +26,7 @@ SCHEDULER.every '1h', :first_in => 0 do |job|
   st = st_points.inject(0, :+)
 
     reopened_points = client.Issue.jql("sprint in openSprints() and status = \"Reopened\"").map{ |issue| issue.fields['customfield_10004'] }.compact
-  reopened = st_points.inject(0, :+)
+  reopened = reopened_points.inject(0, :+)
 
   # QUALITY CHECKED IN ST
   # Reopened
